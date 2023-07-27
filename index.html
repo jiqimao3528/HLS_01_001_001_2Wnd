@@ -3,13 +3,14 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>Unity WebGL Player | urlDemo</title>
+    <title>Unity WebGL Player | writeExercise</title>
     <link rel="shortcut icon" href="TemplateData/favicon.ico">
     <link rel="stylesheet" href="TemplateData/style.css">
   </head>
   <body>
     <div id="unity-container" class="unity-desktop">
-      <canvas id="unity-canvas" width=1280 height=720></canvas>
+      <!-- <canvas id="unity-canvas" width=1280 height=720></canvas> -->
+      <canvas id="unity-canvas"></canvas>
       <div id="unity-loading-bar">
         <div id="unity-logo"></div>
         <div id="unity-progress-bar-empty">
@@ -20,7 +21,7 @@
       <div id="unity-footer">
         <div id="unity-webgl-logo"></div>
         <div id="unity-fullscreen-button"></div>
-        <div id="unity-build-title">urlDemo</div>
+        <div id="unity-build-title">writeExercise</div>
       </div>
     </div>
     <script>
@@ -59,14 +60,14 @@
       }
 
       var buildUrl = "Build";
-      var loaderUrl = buildUrl + "/4.loader.js";
+      var loaderUrl = buildUrl + "/5.loader.js";
       var config = {
-        dataUrl: buildUrl + "/4.data.unityweb",
-        frameworkUrl: buildUrl + "/4.framework.js.unityweb",
-        codeUrl: buildUrl + "/4.wasm.unityweb",
+        dataUrl: buildUrl + "/5.data.unityweb",
+        frameworkUrl: buildUrl + "/5.framework.js.unityweb",
+        codeUrl: buildUrl + "/5.wasm.unityweb",
         streamingAssetsUrl: "StreamingAssets",
         companyName: "DefaultCompany",
-        productName: "urlDemo",
+        productName: "writeExercise",
         productVersion: "0.1",
         showBanner: unityShowBanner,
       };
@@ -80,34 +81,39 @@
 
       //新增代码开始
       //监听窗口大小变化
-      window.addEventListener('resize', resizeGame, false);
-      window.addEventListener('orientationchange', resizeGame, false);
+      // window.addEventListener('resize', resizeGame, false);
+      // window.addEventListener('orientationchange', resizeGame, false);
 
-      //监听全屏事件
-      document.addEventListener("fullscreenchange", handleFullscreen, false);
-      document.addEventListener("webkitfullscreenchange", handleFullscreen, false);
-      document.addEventListener("mozfullscreenchange", handleFullscreen, false);
-      document.addEventListener("MSFullscreenChange", handleFullscreen, false);
+      // //监听全屏事件
+      // document.addEventListener("fullscreenchange", handleFullscreen, false);
+      // document.addEventListener("webkitfullscreenchange", handleFullscreen, false);
+      // document.addEventListener("mozfullscreenchange", handleFullscreen, false);
+      // document.addEventListener("MSFullscreenChange", handleFullscreen, false);
 
-      function handleFullscreen() {
-        var fullscreenElement = document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement || document.msFullscreenElement;
-        var isFullscreen = fullscreenElement == container;
-        if (isFullscreen) {
-          resizeGame(window.innerWidth, window.innerHeight);
-        } else {
-          resizeGame();
-        }
-      }
+      // function handleFullscreen() {
+      //   var fullscreenElement = document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement || document.msFullscreenElement;
+      //   var isFullscreen = fullscreenElement == container;
+      //   if (isFullscreen) {
+      //     resizeGame(window.innerWidth, window.innerHeight);
+      //   } else {
+      //     resizeGame();
+      //   }
+      // }
 
-      resizeGame();
+      // resizeGame();
+      window.addEventListener('resize', resizeGame);
+      window.addEventListener('load', resizeGame);
 
-      function resizeGame(containerWidth = container.offsetWidth, containerHeight = container.offsetHeight) {
+      function resizeGame() {
         var width = 1920; 
         var height = 1080; 
 
-        var ratio = Math.min(containerWidth / width, containerHeight / height);
-        canvas.style.width = width * ratio + 'px';
-        canvas.style.height = height * ratio + 'px';
+        var ratio = Math.min(container.offsetWidth / width, container.offsetHeight / height);
+        var devicePixelRatio = window.devicePixelRatio || 1;
+        canvas.style.width = (width * ratio) + 'px';
+        canvas.style.height = (height * ratio) + 'px';
+        canvas.width = width * ratio * devicePixelRatio;
+        canvas.height = height * ratio * devicePixelRatio;
       }
 
       //新增代码结束
